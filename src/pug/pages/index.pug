@@ -1,0 +1,22 @@
+extends ../layout/index
+
+block variables
+    - var title = 'Main';
+    - var description = 'Main';
+    - var pageClass = 'main-page';
+    - var lang = 'ru';
+
+block content
+    section
+        .container
+            +item('item title', 'item descr')
+    example-component
+
+block script
+    script(type='text/javascript').
+        const foo = true;
+        let bar = function () {
+        };
+        if (foo) {
+            bar(1 + 5)
+        }

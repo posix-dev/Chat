@@ -1,0 +1,24 @@
+include ../utils/mixins
+block variables
+
+doctype html
+html(lang=lang)
+    head
+        meta(charset='utf-8')
+        title #{title}
+        meta(name="description", content=description)
+        //link(style='../assets/sass/auth')
+        block head
+
+    body(class=pageClass)
+        .wrapper
+            #app
+                include ../includes/modules/chat
+                include ../includes/modules/auth_dialog
+                include ../includes/modules/upload-avatar_dialog
+                include ../includes/modules/file-redactor-dialog
+                .content-wrapper.hide
+                    block content
+                //include ../includes/modules/footer
+
+        block script

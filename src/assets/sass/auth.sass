@@ -1,0 +1,79 @@
+@import utils/vars
+@import utils/mixins
+
+.auth-wrapper
+  text-align: center
+  width: rem(520px)
+  height: rem(560px)
+  margin: 0 auto
+
+.auth-dialog
+  background-color: $auth-dialog-background-color
+  width: rem(520px)
+  height: rem(560px)
+
+.auth-dialog__image-wrapper
+  width: rem(140px)
+  height: rem(140px)
+  background-color: $auth-dialog-img-wrapper-background-color
+  margin: rem(40px) auto 0
+  border-radius: 50%
+  background-image: url("../../assets/img/chat.png")
+  background-repeat: no-repeat
+  background-position: center
+
+.auth-dialog__title
+  margin: rem(40px) auto 0
+  text-align: center
+  font-family: "Ubuntu Medium", sans-serif
+  font-size: rem(24px)
+  font-weight: bold
+  line-height: rem(24px)
+
+.auth-dialog__description
+  width: rem(330px)
+  color: $default-color
+  margin: rem(20px) auto 0
+  text-align: center
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 16px
+
+.auth-dialog__form-input_text
+  display: block
+  background-color: $auth-dialog-background-color
+  margin: rem(40px) auto 0
+  color: $auth-dialog-text-input-color
+  border: 0
+  outline: 0
+  border-bottom: 2px solid #465362
+  width: rem(330px)
+  &:focus
+    border-bottom: 2px solid #5288c1
+
+.auth-dialog__form-input_submit
+  display: block
+  margin: rem(40px) auto 0
+  text-align: center
+  padding: rem(15px) rem(40px)
+  border-radius: rem(6px)
+  text-transform: uppercase
+  font-weight: bold
+  font-family: "Ubuntu Medium", sans-serif
+  background-color: #5288c1
+  color: $auth-dialog-text-input-color
+
+.auth-dialog__close-btn
+  position: absolute
+  right: rem(30px)
+  top: rem(20px)
+  cursor: pointer
+  &:before, &:after
+    position: absolute
+    content: ''
+    height: rem(20px)
+    width: rem(2px)
+    background-color: #ffffff
+  &:before
+    transform: rotate(45deg)
+  &:after
+    transform: rotate(-45deg)

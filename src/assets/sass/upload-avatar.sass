@@ -1,0 +1,63 @@
+@import utils/vars
+@import utils/mixins
+@import file-redactor
+
+.upload-avatar-dialog
+  height: rem(210px)
+  width: rem(350px)
+  border-radius: 4px
+  background-color: $auth-dialog-background-color
+
+.upload-avatar-dialog__close-btn
+  position: absolute
+  right: rem(30px)
+  top: rem(20px)
+  cursor: pointer
+  &:before, &:after
+    position: absolute
+    content: ''
+    height: rem(20px)
+    width: rem(2px)
+    background-color: #737e87
+  &:before
+    transform: rotate(45deg)
+  &:after
+    transform: rotate(-45deg)
+
+.upload-avatar-dialog__title
+  font-family: "Ubuntu Medium", sans-serif
+  font-size: 16px
+  font-weight: bold
+  margin-top: rem(32px)
+  margin-left: rem(32px)
+
+.upload-avatar-dialog__profile-wrapper
+  display: flex
+  margin-left: rem(32px)
+  margin-top: rem(30px)
+
+.upload-avatar-dialog__avatar
+  width: rem(87px)
+  height: rem(87px)
+  background-color: $auth-dialog-img-wrapper-background-color
+  border-radius: 50%
+  background-image: url("../../assets/img/camera.png")
+  background-repeat: no-repeat
+  background-position: center
+  cursor: pointer
+
+.upload-avatar-dialog__profile-info
+  display: flex
+  flex-direction: column
+  margin-left: rem(16px)
+  margin-top: rem(20px)
+
+.upload-avatar-dialog__name
+  font-family: "Ubuntu Medium", sans-serif
+  font-size: 16px
+  font-weight: bold
+
+.upload-avatar-dialog__status
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 14px
+  font-weight: 300

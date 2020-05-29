@@ -1,0 +1,11 @@
+div(class='auth-dialog-wrapper hide')
+    div(class='auth-dialog center')
+        div(class='auth-dialog__close-btn')
+        div(class='auth-dialog__image-wrapper')
+        h2(class='auth-dialog__title') Авторизация
+        p(class='auth-dialog__description').
+            Введите, пожалуйста свое ФИО и ник для дальнейшей авторизации
+        form(class='auth-dialog__form' action='#auth', method='POST')
+            input(type='text' class='auth-dialog__form-input_text' value='' name='fio' placeholder='Введите свое ФИО')
+            input(type='text' class='auth-dialog__form-input_text' value='' name='nickname' placeholder='Введите свой ник')
+            input(value='Войти' class='auth-dialog__form-input_submit' type='submit')

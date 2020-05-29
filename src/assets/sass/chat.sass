@@ -1,0 +1,241 @@
+@import utils/vars
+@import utils/mixins
+
+.chat-wrapper
+  width: rem(810px)
+  height: rem(452px)
+  background-color: #0e1621
+
+.chat-options
+  background-color: $auth-dialog-img-wrapper-background-color
+  width: inherit
+  height: rem(20px)
+  display: flex
+  flex-direction: column-reverse
+
+.chat-options__img
+  width: rem(11px)
+  height: inherit
+  margin-left: rem(10px)
+  &:last-child
+    margin-right: rem(10px)
+
+.chat-options__img-wrapper
+  display: flex
+  justify-content: flex-end
+  align-items: center
+  height: 100%
+
+.collapse
+  margin-top: rem(6px)
+  height: rem(3px)
+  cursor: pointer
+  border-bottom: rem(2px) solid #52616d
+
+.fullscreen
+  cursor: pointer
+  width: rem(10px)
+  height: rem(10px)
+  color: transparent
+  border: rem(2px) solid #52616d
+
+.close
+  width: rem(11px)
+  height: rem(11px)
+  cursor: pointer
+  content: url('../../assets/img/ic_close.png')
+
+.chat-content-wrapper
+  display: flex
+  height: 100%
+
+.chat-leftside-wrapper
+  display: flex
+  flex-direction: column
+  background-color: $auth-dialog-background-color
+  margin-right: rem(2px)
+
+.chat-menu-wrapper
+  display: flex
+  padding: rem(10px) rem(22px) rem(30px) rem(16px)
+  align-items: center
+
+.chat-menu__hamburger
+  display: inline-block
+  width: rem(18px)
+  height: rem(12px)
+  cursor: pointer
+  background-image: url('../../assets/img/ic_hamburger.png')
+  background-repeat: no-repeat
+  margin-right: rem(10px)
+
+.chat-menu__search-item
+  background: transparent
+  color: $default-color
+
+.chat-list-wrapper
+  display: flex
+  flex-direction: column
+
+.chat-list
+  margin-left: rem(12px)
+  margin-right: rem(26px)
+
+.chat-item-wrapper
+  display: flex
+
+.chat-item__avatar
+  width: rem(47px)
+  height: rem(48px)
+  border-radius: 50%
+  margin-right: rem(10px)
+  content: url('../../assets/img/default_photo.png')
+  cursor: pointer
+
+.chat-item__profile-name
+  color: #ffffff
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 14px
+  font-weight: 300
+  line-height: rem(24px)
+
+.chat-item__last-message
+  color: $default-color
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 14px
+  font-weight: 300
+  line-height: rem(24px)
+
+.chat-messages-wrapper
+  width: 100%
+  position: relative
+
+.chat-messages-info
+  background-color: $auth-dialog-background-color
+  padding: rem(10px) rem(10px)
+  width: inherit
+
+.chat-messages__type, .chat-messages__member-count
+  margin-left: rem(10px)
+
+.chat-messages__type
+  color: $mainFontColor
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 14px
+  font-weight: 300
+
+.chat-messages__member-count
+  color: $default-color
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 14px
+  font-weight: 300
+
+.chat-writing-wrapper
+  width: 100%
+  display: flex
+  position: absolute
+  bottom: 0
+  left: 0
+
+.chat-detail-messages__avatar
+  border-radius: 50%
+  width: rem(33px)
+  height: rem(33px)
+  content: url("../../assets/img/default_photo.png")
+
+.chat-detail-messages-wrapper
+  display: flex
+  //для отображения справа сообщения
+  //flex-direction: row-reverse
+  margin: rem(5px) rem(10px)
+
+.chat-detail-messages__user-list
+  position: relative
+
+.chat-detail-messages__message
+  padding: rem(6px) rem(10px) rem(2px) rem(12px)
+  background-color: #182533
+  //background-color: #00aabb
+  border-radius: rem(6px)
+
+//left
+.chat-detail-messages__item
+  &:first-child
+    &:after
+      position: absolute
+      content: ''
+      left: 27%
+      top: 51%
+      width: 0
+      height: 0
+      border: rem(11px) solid transparent
+      border-right-color: #182533
+      border-left: 0
+      border-bottom: 0
+      margin-top: rem(-16.5px)
+      margin-left: rem(-33px)
+
+//right
+//.chat-detail-messages__item
+//  &:first-child
+//    &:after
+//      content: ''
+//      position: absolute
+//      right: 26%
+//      top: 51%
+//      width: 0
+//      height: 0
+//      border: rem(11px) solid transparent
+//      border-left-color: #00aabb
+//      border-right: 0
+//      border-bottom: 0
+//      margin-top: -16.5px
+//      margin-right: -33px
+
+.chat-detail-messages__item-wrapper
+  display: flex
+  margin-bottom: rem(5px)
+  margin-left: rem(10px)
+  align-items: center
+
+.chat-detail-messages__message-text
+  margin: 0
+  color: $mainFontColor
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 14px
+  font-weight: 300
+
+.chat-detail-messages__message-time
+  position: relative
+  top: rem(5px)
+  margin-left: rem(12px)
+  color: #7a8c9e
+  font-family: "Ubuntu Light", sans-serif
+  font-size: 14px
+  font-weight: 300
+
+.chat-writing-wrapper
+  background-color: $auth-dialog-background-color
+  padding: rem(20px) rem(4px) rem(20px) rem(16px)
+
+.chat-writing__form
+  width: 100%
+
+.chat-writing__message
+  width: 80%
+  background: transparent
+  color: white
+
+.chat-writing__send-message-btn
+  position: absolute
+  padding: rem(6px) rem(10px)
+  border-radius: rem(5px)
+  margin-right: rem(10px)
+  right: 5px
+  background: #5288c1
+  color: white
+  font-size: 14px
+
+.chat-detail-messages-wrapper-right
+  display: flex
+  flex-direction: row-reverse
