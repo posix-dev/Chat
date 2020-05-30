@@ -13,12 +13,10 @@ html(lang=lang)
     body(class=pageClass)
         .wrapper
             #app
-                include ../includes/modules/chat
                 include ../includes/modules/auth_dialog
-                include ../includes/modules/upload-avatar_dialog
-                include ../includes/modules/file-redactor-dialog
+                include ../includes/modules/chat
+                //include ../includes/modules/upload-avatar_dialog
+                //include ../includes/modules/file-redactor-dialog
                 .content-wrapper.hide
                     block content
                 //include ../includes/modules/footer
-
-        block script
