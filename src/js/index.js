@@ -1,4 +1,3 @@
-import {Server} from "./network/server";
 import {Router} from "./router/router";
 import {Auth} from "./auth";
 import {Chat} from "./chat";

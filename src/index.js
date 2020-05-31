@@ -1,5 +1,5 @@
 // JS
-import './js/'
+import './js/index'
 
 // SCSS
 import './assets/sass/index.sass'
