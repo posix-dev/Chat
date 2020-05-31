@@ -4,6 +4,7 @@
   "description": "My template + pug",
   "main": "index.js",
   "scripts": {
+    "start": "node ./src/js/network/server.js",
     "dev": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
     "build": "webpack --config ./build/webpack.build.conf.js"
   },
@@ -53,5 +54,10 @@
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.18.3",
+    "mongoose": "^5.7.5",
+    "socket.io": "^2.1.1"
+  }
 }

@@ -1,28 +1,3 @@
-export class Store {
-    constructor(reducer, middleware) {
-        this.reducer = reducer
-        this.middleware = middleware
-    }
-
-    dispatch() {
-
-    }
-}
-
-export class Reducer {
-    constructor(action) {
-    }
-
-    reduce(action, state) {
-
-    }
-}
-
-export class Middleware {
-    constructor() {
-    }
-}
-
 export class Router {
 
     constructor() {
@@ -31,6 +6,7 @@ export class Router {
             '#chat': '.chat-wrapper'
         }
         this.currentPage = document.querySelector(this.pageMap['#auth'])
+        this.saveScreenInHistory('#auth')
     }
 
     saveScreenAndNavigateTo(screen) {
@@ -39,13 +15,13 @@ export class Router {
     }
 
     navigateTo(screen) {
-        debugger;
         const pageName = this.pageMap[screen];
 
         if(pageName) {
             const page = document.querySelector(pageName);
 
             if(page) {
+                debugger;
                 if(this.currentPage) {
                     this.currentPage.classList.add('hide');
                 }

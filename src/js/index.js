@@ -1,34 +1,27 @@
-import {Server} from "./server";
+import {Server} from "./network/server";
+import {Router} from "./router/router";
 import {Auth} from "./auth";
-import {QueryParams} from "./queryparams";
-import {Middleware, Reducer, Router, Store} from "./store";
-import {Screens} from "./screens";
+import {Chat} from "./chat";
+import {View} from "./flux/view";
 
-init()
+init();
 
 function init() {
-    const server = new Server()
-    const auth = new Auth()
-    const queryParams = new QueryParams()
-    const store = new Store()
-    const middleware = new Middleware()
-    const reducer = new Reducer()
-    const router = new Router()
-    const screens = new Screens()
-    const authInputSubmit = document.querySelector('.auth-dialog__form-input_submit');
-
-    authInputSubmit.addEventListener('click', e => {
-        e.preventDefault()
-        router.saveScreenAndNavigateTo(screens.chatScreen)
-    })
+    const server = new Server();
+    const router = new Router();
+    const view = new View();
+    // const store = new Store();
+    const auth = new Auth(server, router, view);
+    const chat = new Chat(server, router, view);
 
     window.addEventListener('popstate', e => {
-        if(e.state && e.state.page) {
-            router.navigateTo(e.state.page)
+        if (e.state && e.state.page) {
+            router.navigateTo(e.state.page);
         }
-    })
+    });
 
     window.onbeforeunload = () => router.back();
+
 }
 
 
