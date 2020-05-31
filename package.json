@@ -12,14 +12,7 @@
     "> 1%",
     "last 3 version"
   ],
-  "author": "https://github.com/vedees",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vedees/webpack-template-pug.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vedees/webpack-template-pug/issues"
-  },
+  "author": "https://github.com/posix-dev",
   "keywords": [
     "webpack",
     "webpack4",
@@ -55,9 +48,11 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "express": "^4.17.1",
     "body-parser": "^1.18.3",
+    "express": "^4.17.1",
     "mongoose": "^5.7.5",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.3.0",
+    "socket.io-json-parser": "^2.1.0"
   }
 }

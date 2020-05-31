@@ -2,11 +2,12 @@ import {Router} from "./router/router";
 import {Auth} from "./auth";
 import {Chat} from "./chat";
 import {View} from "./flux/view";
+import {ClientServer} from "./network/clientserver";
 
 init();
 
 function init() {
-    const server = new Server();
+    const server = new ClientServer();
     const router = new Router();
     const view = new View();
     // const store = new Store();

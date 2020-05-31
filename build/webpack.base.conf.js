@@ -17,7 +17,6 @@ const PAGES_DIR = `${PATHS.src}/pug/pages/`
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.pug'))
 
 module.exports = {
-    target: "node",
     // BASE config
     externals: {
         paths: PATHS
