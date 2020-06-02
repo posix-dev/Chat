@@ -1,24 +1,34 @@
 import {Middleware, Reducer, Store} from "./flux/stores/store";
 import {Screens} from "./utils/screens";
+import {View} from "./flux/view";
+import {authSubmitAction, initChatAction} from "./flux/actions";
+import {AuthIdHandler} from "./network/authIdHandler";
 
-export class Auth {
+export class Auth extends View {
 
-    constructor(server, router, view) {
+    constructor(router, server, authIdHandler) {
+        super();
         this.reducer = new Reducer();
         this.middleware = new Middleware(server);
-        this.store = new Store(this.reducer, this.middleware);
-        this.view = view;
+        this.clientServer = server;
+        this.store = new Store(this.reducer, this.middleware, this);
         this.router = router;
+        this.authIdHandler = authIdHandler;
         this.screens = new Screens();
+
+        this.clientServer.getSocket().on('addUser', user => {
+            console.log(`addUser event ${user}`);
+            this.authIdHandler.setId(user.id);
+            this.store.dispatch(initChatAction)
+            this.router.saveScreenAndNavigateTo(this.screens.chatScreen);
+        });
 
         const authInputSubmit = document.querySelector('.auth-dialog__form-input_submit');
 
         authInputSubmit.addEventListener('click', e => {
             e.preventDefault();
             const data = this.convertAndGetFormData();
-            console.dir(data)
             this.login(data)
-            this.router.saveScreenAndNavigateTo(this.screens.chatScreen);
         });
     }
 
@@ -35,6 +45,17 @@ export class Auth {
     }
 
     login(data) {
-
+        const action = {
+            ...authSubmitAction,
+            data: data
+        }
+        this.store.dispatch(action)
     }
+
+    render(state) {
+        super.render(state);
+        console.log('auth')
+    }
+
+
 }

@@ -13,29 +13,27 @@ div(class='chat-wrapper center hide')
                         input(type='search' class='chat-menu__search-item' placeholder='Найти...')
             div(class='chat-list-wrapper')
                 ul(class='chat-list')
-                    li(class='chat-item')
-                        div(class='chat-item-wrapper')
-                            img(class='chat-item__avatar')
-                            div(class='chat-item__info')
-                                p(class='chat-item__profile-name') Игорь Яицкий
-                                p(class='chat-item__last-message') Рад был пообщаться
         div(class='chat-messages-wrapper')
             div(class='chat-messages-info')
                 p(class='chat-messages__type') Чат
-                p(class='chat-messages__member-count') 2 участника
-            div(class='chat-detail-messages-wrapper')
-                img(class='chat-detail-messages__avatar')
-                ul(class='chat-detail-messages__user-list')
-                    li(class='chat-detail-messages__item')
-                        div(class='chat-detail-messages__item-wrapper')
-                            div(class='chat-detail-messages__message')
-                                span(class='chat-detail-messages__message-text') Привет!
-                                span(class='chat-detail-messages__message-time') 17:55
-                    li(class='chat-detail-messages__item')
-                        div(class='chat-detail-messages__item-wrapper')
-                            div(class='chat-detail-messages__message')
-                                span(class='chat-detail-messages__message-text') Привет2!
-                                span(class='chat-detail-messages__message-time') 17:56
+                p(class='chat-messages__member-count')
+            span(class='chat-messages__typing')
+            div(class='chat-detail-messages')
+                div(class='chat-detail-messages-wrapper' id='chat-detail-messages-wrapper')
+                    img(class='chat-detail-messages__avatar')
+                    ul(class='chat-detail-messages__user-list')
+            //        li(class='chat-detail-messages__item')
+            //            div(class='chat-detail-messages__item-wrapper')
+            //                div(class='chat-detail-messages__message')
+            //                    span(class='chat-detail-messages__message-text') Привет!
+            //                    span(class='chat-detail-messages__message-time') 17:55
+            //        li(class='chat-detail-messages__item')
+            //            div(class='chat-detail-messages__item-wrapper')
+            //                div(class='chat-detail-messages__message')
+            //                    span(class='chat-detail-messages__message-text') Привет2!
+            //                    span(class='chat-detail-messages__message-time') 17:56
+
+
             //div(class='chat-detail-messages-wrapper-right')
             //    img(class='chat-detail-messages__avatar')
             //    ul(class='chat-detail-messages__user-list')

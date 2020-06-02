@@ -21,7 +21,6 @@ export class Router {
             const page = document.querySelector(pageName);
 
             if(page) {
-                debugger;
                 if(this.currentPage) {
                     this.currentPage.classList.add('hide');
                 }

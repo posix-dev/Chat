@@ -57,7 +57,7 @@
 
 .chat-menu-wrapper
   display: flex
-  padding: rem(10px) rem(22px) rem(30px) rem(16px)
+  padding: rem(10px) rem(22px) rem(25px) rem(16px)
   align-items: center
 
 .chat-menu__hamburger
@@ -76,6 +76,8 @@
 .chat-list-wrapper
   display: flex
   flex-direction: column
+  overflow-y: scroll
+  padding: rem(5px)
 
 .chat-list
   margin-left: rem(12px)
@@ -107,13 +109,14 @@
   line-height: rem(24px)
 
 .chat-messages-wrapper
+  height: 85%
   width: 100%
   position: relative
+  overflow-y: scroll
 
 .chat-messages-info
   background-color: $auth-dialog-background-color
   padding: rem(10px) rem(10px)
-  width: inherit
 
 .chat-messages__type, .chat-messages__member-count
   margin-left: rem(10px)
@@ -131,11 +134,14 @@
   font-weight: 300
 
 .chat-writing-wrapper
-  width: 100%
-  display: flex
-  position: absolute
-  bottom: 0
-  left: 0
+  width: rem(551px)
+  //display: flex
+  position: fixed
+  float: right
+  bottom: rem(-20px)
+  right: 0
+  background-color: $auth-dialog-background-color
+  padding: rem(20px) rem(4px) rem(20px) rem(16px)
 
 .chat-detail-messages__avatar
   border-radius: 50%
@@ -146,8 +152,9 @@
 .chat-detail-messages-wrapper
   display: flex
   //для отображения справа сообщения
-  //flex-direction: row-reverse
+  flex-direction: row-reverse
   margin: rem(5px) rem(10px)
+  overflow-y: scroll
 
 .chat-detail-messages__user-list
   position: relative
@@ -159,21 +166,21 @@
   border-radius: rem(6px)
 
 //left
-.chat-detail-messages__item
-  &:first-child
-    &:after
-      position: absolute
-      content: ''
-      left: 27%
-      top: 51%
-      width: 0
-      height: 0
-      border: rem(11px) solid transparent
-      border-right-color: #182533
-      border-left: 0
-      border-bottom: 0
-      margin-top: rem(-16.5px)
-      margin-left: rem(-33px)
+//.chat-detail-messages__item
+//  &:first-child
+//    &:before
+//      content: ''
+//      position: absolute
+//      left: 0
+//      top: 50%
+//      width: 0
+//      height: 0
+//      border: rem(11px) solid transparent
+//      border-right-color: #182533
+//      border-left: 0
+//      border-bottom: 0
+//      margin-top: 0
+//      margin-left: 0
 
 //right
 //.chat-detail-messages__item
@@ -214,10 +221,6 @@
   font-size: 14px
   font-weight: 300
 
-.chat-writing-wrapper
-  background-color: $auth-dialog-background-color
-  padding: rem(20px) rem(4px) rem(20px) rem(16px)
-
 .chat-writing__form
   width: 100%
 
@@ -232,6 +235,7 @@
   border-radius: rem(5px)
   margin-right: rem(10px)
   right: 5px
+  cursor: pointer
   background: #5288c1
   color: white
   font-size: 14px
@@ -239,3 +243,12 @@
 .chat-detail-messages-wrapper-right
   display: flex
   flex-direction: row-reverse
+
+.chat-messages__typing
+  position: fixed
+  font-size: 12px
+  color: #7a8c9e
+  bottom: 0
+  right: 0
+  margin-right: rem(16px)
+  margin-bottom: rem(50px)
