@@ -1,6 +1,6 @@
 class Server {
     constructor() {
-        this.PORT = 3103;
+        this.PORT = 3116;
         const express = require('express');
         const app = express();
         let server = require('http').createServer(app);
@@ -8,7 +8,7 @@ class Server {
         let path = require('path');
         app.use(express.static(path.join(__dirname, 'src')));
         app.set('view engine', 'ejs');
-        const clients = [];
+        let clients = [];
 
         io.on('connection', socket => {
             socket.username = 'Anonymous';
@@ -18,6 +18,12 @@ class Server {
 
             socket.on('disconnect', () => {
                 io.sockets.emit('usersCount', Object.keys(io.sockets.sockets).length);
+                clients = clients.filter(item => item.id !== socket.id)
+                socket.broadcast.emit('userList', clients);
+            });
+
+            socket.on('auth', () => {
+                io.sockets.sockets[socket.id].emit('auth', socket.id);
             });
 
             socket.on('message', message => {
@@ -51,7 +57,6 @@ class Server {
                 socket.broadcast.emit('untyping');
             });
         })
-
 
 
         app.get('/', (req, res) => {

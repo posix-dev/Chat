@@ -83,6 +83,9 @@
   margin-left: rem(12px)
   margin-right: rem(26px)
 
+.chat-item
+  margin-bottom: rem(5px)
+
 .chat-item-wrapper
   display: flex
 
@@ -151,8 +154,6 @@
 
 .chat-detail-messages-wrapper
   display: flex
-  //для отображения справа сообщения
-  flex-direction: row-reverse
   margin: rem(5px) rem(10px)
   overflow-y: scroll
 
@@ -203,6 +204,7 @@
   display: flex
   margin-bottom: rem(5px)
   margin-left: rem(10px)
+  margin-right: rem(10px)
   align-items: center
 
 .chat-detail-messages__message-text
@@ -252,3 +254,9 @@
   right: 0
   margin-right: rem(16px)
   margin-bottom: rem(50px)
+
+.right
+  flex-direction: row-reverse
+
+.left
+  flex-direction: row

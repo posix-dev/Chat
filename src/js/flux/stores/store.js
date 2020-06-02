@@ -101,6 +101,11 @@ export class Middleware {
                         .clientServer
                         .getSocket()
                         .emit('addUser', action.data);
+
+                    this
+                        .clientServer
+                        .getSocket()
+                        .emit('auth');
                 }
                 return;
             case chatMessageWriting.type:
