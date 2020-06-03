@@ -1,6 +1,6 @@
 class Server {
     constructor() {
-        this.PORT = 3116;
+        this.PORT = 3002;
         const express = require('express');
         const app = express();
         let server = require('http').createServer(app);
@@ -28,7 +28,8 @@ class Server {
 
             socket.on('message', message => {
                 console.dir(`message - ${message}`);
-                io.sockets.emit('message', message);
+                // const user = clients.filter(c => c.id === socket.id)[0];
+                io.sockets.emit('message', {...message, fio: socket.username});
             });
             socket.on('addUser', user => {
                 console.dir(`addUser - ${user['fio']} ${user['nickname']}`);
@@ -37,6 +38,7 @@ class Server {
                 }
                 const userData = {
                     ...user,
+                    fio: user['fio'] ? user['fio'] : socket.username,
                     id: socket.id
                 };
                 clients.push(userData);

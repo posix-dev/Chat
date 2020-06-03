@@ -14,10 +14,12 @@ export class Chat extends View {
         this.middleware = new Middleware(server);
         this.store = new Store(this.reducer, this.middleware, this);
         this.router = router;
+        let userArray = [];
         const selfMessageValue = selfMessage({});
-        const userItemValue = userItem({});
+        this.userItemValue = userItem({});
+        const searchInput = document.querySelector('.chat-menu__search-item');
         const membersCount = document.querySelector('.chat-messages__member-count');
-        const usersList = document.querySelector('.chat-list');
+        this.usersList = document.querySelector('.chat-list');
         const messageDetailWrapper = document.querySelector('.chat-detail-messages');
         const typingMessage = document.querySelector('.chat-messages__typing');
         const chatMessageBtn = document.querySelector('.chat-writing__send-message-btn');
@@ -34,15 +36,8 @@ export class Chat extends View {
 
         this.clientServer.getSocket().on('userList', users => {
             debugger;
-            usersList.innerHTML = '';
-            users.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = userItemValue.trim();
-                const name = li.querySelector('.chat-item__profile-name');
-                // const lastMessage = li.querySelector('.chat-item__last-message');
-                name.textContent = item.fio;
-                usersList.appendChild(li);
-            })
+            userArray = users;
+            this.renderUsers(userArray)
         });
 
         this.clientServer.getSocket().on('typing', data => {
@@ -58,11 +53,13 @@ export class Chat extends View {
             div.innerHTML = selfMessageValue.trim();
 
             const messagesWrapper = div.querySelector('.chat-detail-messages-wrapper');
-            const messageList = div.querySelector('.chat-detail-messages__user-list');
+            let messageList = div.querySelector('.chat-detail-messages__user-list');
             const messageLi = div.querySelector('.chat-detail-messages__item');
             const detailMessageWrapper = div.querySelector('.chat-detail-messages__message');
             const text = messageLi.querySelector('.chat-detail-messages__message-text');
             const time = messageLi.querySelector('.chat-detail-messages__message-time');
+            const avatar = messageLi.querySelector('.chat-detail-messages__avatar');
+            const userName = messageLi.querySelector('.chat-detail-messages__username');
             const userLi = document.querySelector('.chat-item');
             const lastMessage = userLi.querySelector('.chat-item__last-message');
 
@@ -70,18 +67,31 @@ export class Chat extends View {
                 messagesWrapper.classList.add("right");
                 detailMessageWrapper.style.backgroundColor = '#2B5278';
                 time.style.color = '#7DA8D3';
+                userName.style.color = '#90c1f3';
             } else {
                 messagesWrapper.classList.add("left");
             }
 
-            text.innerHTML = `${data.message} ${data.id}`;
+            if (messageDetailWrapper.contains(messageList)) {
+                messageList =
+                    messagesWrapper.querySelector('.chat-detail-messages__user-list');
+                avatar.style.display = 'none';
+            }
+
+            debugger;
+            if (messageList.length > 1) {
+                avatar.style.display = 'none';
+            }
+
+            text.innerHTML = `${data.message}`;
+            userName.textContent = `${data.fio}`;
             time.innerHTML = new Date(data.date).toLocaleDateString('ru', {
                 hour: 'numeric',
                 minute: 'numeric',
             }).substr(12, 8);
-            if(lastMessage) {
-                lastMessage.textContent = `${data.message}`;
-            }
+            // if(lastMessage) {
+            //     lastMessage.textContent = `${data.message}`;
+            // }
             messageList.appendChild(messageLi);
             messageDetailWrapper.innerHTML += div.innerHTML;
         });
@@ -89,9 +99,13 @@ export class Chat extends View {
         textMessageField.addEventListener('keypress', () => {
             this.store.dispatch(chatMessageWriting);
             this.debounce(() => {
-                debugger;
                 this.store.dispatch(chatMessageStopWriting);
             }, 1000)();
+        });
+
+        searchInput.addEventListener('keyup', e => {
+            const filteredList = this.getMatchList(e.target.value, userArray);
+            this.renderUsers(filteredList);
         });
 
         chatMessageBtn.addEventListener('click', e => {
@@ -136,9 +150,35 @@ export class Chat extends View {
         };
     };
 
+    getMatchList(matchedString, list) {
+        return Array.from(list).filter(item =>
+            (this.isMatching(item.fio, matchedString))
+        );
+    }
+
+
+    isMatching(full = '', chunk = '') {
+        console.dir(`eeee ${full} - ${chunk}`)
+        let lowCaseFull = full.toLowerCase();
+        let lowCaseChunk = chunk.toLowerCase();
+
+        return lowCaseFull.includes(lowCaseChunk);
+    };
+
     render(state) {
         super.render(state);
         console.log('chat render')
     }
 
+    renderUsers(users) {
+        this.usersList.innerHTML = '';
+        users.forEach(item => {
+            const li = document.createElement('li');
+            li.innerHTML = this.userItemValue.trim();
+            const name = li.querySelector('.chat-item__profile-name');
+            // const lastMessage = li.querySelector('.chat-item__last-message');
+            name.textContent = item.fio;
+            this.usersList.appendChild(li);
+        })
+    }
 }

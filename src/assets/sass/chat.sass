@@ -72,6 +72,8 @@
 .chat-menu__search-item
   background: transparent
   color: $default-color
+  &::placeholder
+    font-size: rem(17px)
 
 .chat-list-wrapper
   display: flex
@@ -118,6 +120,9 @@
   overflow-y: scroll
 
 .chat-messages-info
+  position: fixed
+  width: 68%
+  z-index: 5
   background-color: $auth-dialog-background-color
   padding: rem(10px) rem(10px)
 
@@ -146,6 +151,9 @@
   background-color: $auth-dialog-background-color
   padding: rem(20px) rem(4px) rem(20px) rem(16px)
 
+.chat-detail-messages
+  margin-top: rem(70px)
+
 .chat-detail-messages__avatar
   border-radius: 50%
   width: rem(33px)
@@ -161,7 +169,7 @@
   position: relative
 
 .chat-detail-messages__message
-  padding: rem(6px) rem(10px) rem(2px) rem(12px)
+  padding: rem(9px) rem(10px) rem(2px) rem(12px)
   background-color: #182533
   //background-color: #00aabb
   border-radius: rem(6px)
@@ -199,6 +207,14 @@
 //      border-bottom: 0
 //      margin-top: -16.5px
 //      margin-right: -33px
+
+.chat-detail-messages__username
+  font-size: 12px
+  max-width: rem(30px)
+  position: absolute
+  color: #d45d75
+  top: 0
+  left: rem(15px)
 
 .chat-detail-messages__item-wrapper
   display: flex
