@@ -40,7 +40,7 @@ export class ChatMessagesScreen {
     }
 
     initServerListeners() {
-        this.clientServer.socket.on('message', data =>  this.handleMessage(data));
+        this.clientServer.socket.on('message', data => this.handleMessage(data));
 
         this.clientServer.socket.on('usersCount', usersCount => {
             this.membersCount.textContent = `${usersCount} ${this.declOfNum(usersCount)}`;
@@ -84,9 +84,7 @@ export class ChatMessagesScreen {
             detailMessagesWrapper.classList.add("left");
         }
 
-        if (data.avatar) {
-            avatar.src = data.avatar;
-        }
+        if (data.avatar) avatar.src = data.avatar;
 
         text.innerHTML = `${data.message}`;
         userName.textContent = `${data.fio}`;
@@ -139,4 +137,12 @@ export class ChatMessagesScreen {
         return listTitles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
     }
 
+    renderMessages(user) {
+        Array.from(this.messageDetailWrapper.children).forEach(item => {
+            //костыль
+            if (
+                item.lastChild.firstChild.firstChild.firstChild.firstChild.textContent === user.fio
+            ) item.firstChild.src = user.avatar;
+        });
+    }
 }

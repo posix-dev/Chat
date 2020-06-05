@@ -75,8 +75,6 @@ export class ChatUserScreen {
             this.userArray = users;
             this.renderUsers(this.userArray);
         });
-
-        this.clientServer.socket.on('sendImg', user => this.handleImg(user));
     }
 
     handleImg(user) {
