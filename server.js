@@ -6,7 +6,6 @@ class Server {
         let server = require('http').createServer(app);
         let io = require('socket.io').listen(server);
         let path = require('path');
-        let fs = require('fs');
         app.use(express.static(path.join(__dirname, 'src')));
         app.set('view engine', 'ejs');
         let clients = [];
@@ -14,7 +13,6 @@ class Server {
         io.on('connection', socket => {
             socket.username = 'Anonymous';
 
-            //send user's count
             io.sockets.emit('usersCount', Object.keys(io.sockets.sockets).length);
 
             socket.on('disconnect', () => {
@@ -35,18 +33,15 @@ class Server {
             });
 
             socket.on('sendImg', async img => {
-                console.log(`just sendImg`);
                 const objIndex = clients.findIndex((user => user.id === socket.id));
                 clients[objIndex].avatar = img;
                 clients.forEach(item => {
                     const exist = item.avatar.length > 0;
-                    console.dir(`test sendMes ${exist} ${item.fio} ${item.id}`);
                 })
                 io.sockets.emit('sendImg', clients[objIndex]);
             });
 
             socket.on('addUser', user => {
-                console.dir(`addUser - ${user['fio']} ${user['nickname']}`);
                 if (user['fio']) {
                     socket.username = user['fio'];
                 }
@@ -62,12 +57,10 @@ class Server {
             })
 
             socket.on('userList', data => {
-                console.dir(`userList ${clients}`);
                 io.sockets.emit('userList', clients);
             });
 
             socket.on('typing', () => {
-                console.dir(`typing ${socket.username}`);
                 socket.broadcast.emit('typing', {username: socket.username});
             });
 

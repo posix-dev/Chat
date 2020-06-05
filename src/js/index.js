@@ -1,6 +1,6 @@
 import {Router} from "./router/router";
-import {Auth} from "./auth";
-import {Chat} from "./chat";
+import {AuthScreen} from "./authScreen";
+import {ChatScreen} from "./chatScreen";
 import {ClientServer} from "./network/clientserver";
 import {AuthIdHandler} from "./network/authIdHandler";
 
@@ -10,8 +10,8 @@ function init() {
     const router = new Router();
     const clientServer = new ClientServer();
     const authIdHandler = new AuthIdHandler();
-    const auth = new Auth(router, clientServer, authIdHandler);
-    const chat = new Chat(router, clientServer, authIdHandler);
+    const auth = new AuthScreen(router, clientServer, authIdHandler);
+    const chat = new ChatScreen(router, clientServer, authIdHandler);
 
     clientServer.socket.on('connect', function (m) {
         console.log(`connect ${m}`);

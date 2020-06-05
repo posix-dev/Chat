@@ -1,6 +1,7 @@
-export class Screens {
-    constructor() {
-        this.chatScreen = '#chat'
-        this.authScreen = '#auth'
-    }
+const chatScreen = '#chat';
+const authScreen = '#auth';
+
+export {
+    chatScreen,
+    authScreen
 }
