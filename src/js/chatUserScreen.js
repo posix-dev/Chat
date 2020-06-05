@@ -1,25 +1,64 @@
 import userItem from "../pug/includes/modules/user-item.pug";
+import {sendImage} from "./flux/actions";
 
 export class ChatUserScreen {
 
-    constructor(clientServer) {
-        this.initVariables(clientServer);
+    constructor(clientServer, middleware) {
+        this.initVariables(clientServer, middleware);
+        this.initUiVariables();
         this.initUiListeners();
         this.initServerListeners();
     }
 
-    initVariables(clientServer) {
+    initVariables(clientServer, middleware) {
         this.userArray = [];
         this.userItemValue = userItem({});
+        this.clientServer = clientServer;
+        this.middleware = middleware;
+    }
+
+    initUiVariables() {
         this.usersList = document.querySelector('.chat-list');
         this.searchInput = document.querySelector('.chat-menu__search-item');
-        this.clientServer = clientServer;
+        this.uploadAvatarWrapper = document.querySelector('.upload-avatar-dialog-wrapper');
+        this.fileRedactorWrapper = document.querySelector('.file-redactor-dialog-wrapper');
+        this.uploadAvatarCloseBtn = document.querySelector('.upload-avatar-dialog__close-btn');
+        this.uploadedAvatarImg = this.fileRedactorWrapper.querySelector('.file-redactor-dialog__img');
+        this.uploadAvatarBtn = document.querySelector('.upload-avatar-dialog__avatar');
+        this.uploadAvatarChooseInput = document.querySelector('.upload-avatar-dialog__choose-file');
+        this.uploadAvatarBtn = document.querySelector('.upload-avatar-dialog__avatar');
+        this.uploadAvatarChooseInput = document.querySelector('.upload-avatar-dialog__choose-file');
     }
 
     initUiListeners() {
         this.searchInput.addEventListener('keyup', e => {
             const filteredList = this.getMatchList(e.target.value, this.userArray);
             this.renderUsers(filteredList);
+        });
+        this.uploadAvatarCloseBtn.addEventListener(
+            'click', e => this.uploadAvatarWrapper.classList.add('hide')
+        );
+
+        this.uploadAvatarChooseInput.addEventListener(
+            'change', e => this.uploadImgToServer(e)
+        );
+
+        this.uploadAvatarBtn.addEventListener(
+            'click', e => this.uploadAvatarChooseInput.click()
+        );
+
+        this.uploadAvatarChooseInput.addEventListener(
+            'change', e => this.uploadImgToServer(e)
+        );
+
+        this.usersList.addEventListener('click', e => {
+            let target = e.target;
+
+            if (target.tagName === 'IMG') {
+                if (target.classList.contains('chat-item__avatar')) {
+                    this.uploadAvatarWrapper.classList.remove('hide');
+                }
+            }
         });
     }
 
@@ -28,11 +67,14 @@ export class ChatUserScreen {
             this.userArray = users;
             this.renderUsers(this.userArray);
         });
+
+        this.clientServer.socket.on('sendImg', user => this.handleImg(user));
     }
 
     handleImg(user) {
         const objIndex = this.userArray.findIndex((item => item.id === user.id));
         this.userArray[objIndex].avatar = user.avatar;
+        this.fileRedactorWrapper.classList.add('hide');
         this.renderUsers(this.userArray);
     }
 
@@ -63,7 +105,7 @@ export class ChatUserScreen {
             const userName = child.querySelector('.chat-item__profile-name');
             const fio = item.fio ? item.fio : 'Anonymous';
             if (userName.textContent === fio) {
-                if(message) {
+                if (message) {
                     const lastMessage = child.querySelector('.chat-item__last-message');
                     lastMessage.textContent = message;
                 }
@@ -83,6 +125,29 @@ export class ChatUserScreen {
         let lowCaseChunk = chunk.toLowerCase();
 
         return lowCaseFull.includes(lowCaseChunk);
-    };
+    }
+
+    uploadImgToServer(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+
+        reader.onload = e => {
+            this.uploadAvatarWrapper.classList.add('hide');
+            this.fileRedactorWrapper.classList.remove('hide');
+            this.uploadedAvatarImg.src = e.target.result;
+
+            const saveBtn = this.fileRedactorWrapper.querySelector('.save');
+            const cancelBtn = this.fileRedactorWrapper.querySelector('.cancel');
+            saveBtn.addEventListener('click', () =>
+                //нужен лоадер
+                this.middleware.invoke({...sendImage, data: e.target.result})
+            );
+            cancelBtn.addEventListener(
+                'click', () => this.fileRedactorWrapper.classList.add('hide')
+            );
+        };
+
+        reader.readAsDataURL(file);
+    }
 
 }

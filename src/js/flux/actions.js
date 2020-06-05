@@ -5,7 +5,7 @@ import {
     CHAT_MESSAGE_STOP_WRITING,
     CHAT_MESSAGE_WRITING,
     CHAT_SEND_MESSAGE,
-    INIT
+    INIT, SEND_IMAGE
 } from '../utils/constants'
 
 const initChatAction = {
@@ -29,6 +29,9 @@ const chatMessageWriting = {
 const chatMessageStopWriting = {
     type: CHAT_MESSAGE_STOP_WRITING
 }
+const sendImage = {
+    type: SEND_IMAGE
+}
 
 export {
     initChatAction,
@@ -37,5 +40,6 @@ export {
     chatCloseAction,
     chatSendMessageAction,
     chatMessageWriting,
-    chatMessageStopWriting
+    chatMessageStopWriting,
+    sendImage
 }

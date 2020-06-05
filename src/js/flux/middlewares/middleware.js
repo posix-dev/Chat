@@ -3,7 +3,7 @@ import {
     authCloseAction,
     authSubmitAction,
     chatCloseAction,
-    chatSendMessageAction, chatMessageWriting, chatMessageStopWriting
+    chatSendMessageAction, chatMessageWriting, chatMessageStopWriting, sendImage
 } from "../actions";
 
 export class Middleware {
@@ -52,6 +52,14 @@ export class Middleware {
                     .clientServer
                     .socket
                     .emit('untyping');
+                return;
+            case sendImage.type:
+                if (action.data) {
+                    this
+                        .clientServer
+                        .socket
+                        .emit('sendImg', action.data);
+                }
                 return;
             default:
                 return;
