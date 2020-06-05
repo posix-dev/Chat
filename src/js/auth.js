@@ -16,15 +16,15 @@ export class Auth extends View {
         this.authIdHandler = authIdHandler;
         this.screens = new Screens();
 
-        this.clientServer.getSocket().on('auth', authId => {
+        this.clientServer.socket.on('auth', authId => {
             console.log(`auth event ${authId}`);
             this.authIdHandler.setId(authId);
+            this.router.saveScreenAndNavigateTo(this.screens.chatScreen);
         });
 
-        this.clientServer.getSocket().on('addUser', user => {
+        this.clientServer.socket.on('addUser', user => {
             console.log(`addUser event ${user}`);
             this.store.dispatch(initChatAction)
-            this.router.saveScreenAndNavigateTo(this.screens.chatScreen);
         });
 
         const authInputSubmit = document.querySelector('.auth-dialog__form-input_submit');

@@ -12,18 +12,11 @@ function init() {
     const authIdHandler = new AuthIdHandler();
     const auth = new Auth(router, clientServer, authIdHandler);
     const chat = new Chat(router, clientServer, authIdHandler);
-    // let pug = require('pug');
-    // pug.renderFile('./src/pug/incudes/modules/message.pug',{}, () => {
-    //     console.log('okay');
-    // })
 
-    clientServer.getSocket().on('connect', function (m) {
+    clientServer.socket.on('connect', function (m) {
         console.log(`connect ${m}`);
     });
-    clientServer.getSocket().on('connection', function (m) {
-        console.log(`connection ${m}`);
-    });
-    clientServer.getSocket().on('disconnect', function () {
+    clientServer.socket.on('disconnect', function () {
         console.log('disconnect');
     });
 

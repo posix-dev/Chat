@@ -84,14 +84,14 @@ export class Middleware {
             case initChatAction.type:
                 this
                     .clientServer
-                    .getSocket()
+                    .socket
                     .emit('userList');
                 return;
             case chatSendMessageAction.type:
                 if (action.data) {
                     this
                         .clientServer
-                        .getSocket()
+                        .socket
                         .emit('message', action.data);
                 }
                 return;
@@ -99,25 +99,25 @@ export class Middleware {
                 if (action.data) {
                     this
                         .clientServer
-                        .getSocket()
+                        .socket
                         .emit('addUser', action.data);
 
                     this
                         .clientServer
-                        .getSocket()
+                        .socket
                         .emit('auth');
                 }
                 return;
             case chatMessageWriting.type:
                 this
                     .clientServer
-                    .getSocket()
+                    .socket
                     .emit('typing');
                 return;
             case chatMessageStopWriting.type:
                 this
                     .clientServer
-                    .getSocket()
+                    .socket
                     .emit('untyping');
                 return;
             default:
