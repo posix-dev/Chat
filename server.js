@@ -1,6 +1,6 @@
 class Server {
     constructor() {
-        this.PORT = 3014;
+        this.PORT = 3015;
         const express = require('express');
         const app = express();
         let server = require('http').createServer(app);
@@ -25,11 +25,11 @@ class Server {
                 io.sockets.sockets[socket.id].emit('auth', socket.id);
             });
 
-            socket.on('message', message => {
+            socket.on('message', messageData => {
                 console.dir(`just message`);
                 const objIndex = clients.findIndex((user => user.id === socket.id));
-                clients[objIndex].messages.push(message);
-                io.sockets.emit('message', {...message, fio: socket.username, avatar: clients[objIndex].avatar});
+                clients[objIndex].messages.push(messageData.message);
+                io.sockets.emit('message', {...messageData, fio: socket.username, avatar: clients[objIndex].avatar});
             });
 
             socket.on('sendImg', async img => {

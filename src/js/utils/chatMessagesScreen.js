@@ -71,6 +71,8 @@ export class ChatMessagesScreen {
         const time = messageLi.querySelector('.chat-detail-messages__message-time');
         const avatar = detailMessagesWrapper.querySelector('.chat-detail-messages__avatar');
         const userName = messageLi.querySelector('.chat-detail-messages__username');
+        const objIndex = this.chatUserScreen.userArray.findIndex((i => i.id === data.id));
+        this.chatUserScreen.userArray[objIndex].messages.push(data.message);
         this.chatUserScreen.updateUserLastMessage(data.id, data.message);
 
         if (data.id === this.authIdHandler.id) {

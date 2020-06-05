@@ -24,19 +24,22 @@ export class ChatUserScreen {
         this.fileRedactorWrapper = document.querySelector('.file-redactor-dialog-wrapper');
         this.uploadAvatarCloseBtn = document.querySelector('.upload-avatar-dialog__close-btn');
         this.uploadedAvatarImg = this.fileRedactorWrapper.querySelector('.file-redactor-dialog__img');
-        this.uploadAvatarBtn = document.querySelector('.upload-avatar-dialog__avatar');
         this.uploadAvatarChooseInput = document.querySelector('.upload-avatar-dialog__choose-file');
         this.uploadAvatarBtn = document.querySelector('.upload-avatar-dialog__avatar');
+        this.uploadName = document.querySelector('.upload-avatar-dialog__name');
         this.uploadAvatarChooseInput = document.querySelector('.upload-avatar-dialog__choose-file');
     }
 
     initUiListeners() {
         this.searchInput.addEventListener('keyup', e => {
             const filteredList = this.getMatchList(e.target.value, this.userArray);
+            debugger;
             this.renderUsers(filteredList);
         });
         this.uploadAvatarCloseBtn.addEventListener(
-            'click', e => this.uploadAvatarWrapper.classList.add('hide')
+            'click', e => {
+                this.uploadAvatarWrapper.classList.add('hide');
+            }
         );
 
         this.uploadAvatarChooseInput.addEventListener(
@@ -56,6 +59,11 @@ export class ChatUserScreen {
 
             if (target.tagName === 'IMG') {
                 if (target.classList.contains('chat-item__avatar')) {
+                    debugger;
+                    this.uploadAvatarBtn.src = e.target.src;
+                    const wrapper = e.target.nextElementSibling;
+                    const name = wrapper.firstChild;
+                    this.uploadName.textContent = name.textContent;
                     this.uploadAvatarWrapper.classList.remove('hide');
                 }
             }
@@ -87,8 +95,9 @@ export class ChatUserScreen {
             const avatar = li.querySelector('.chat-item__avatar');
             const lastMessage = li.querySelector('.chat-item__last-message');
             name.textContent = item.fio;
+            debugger;
             if (item.messages && item.messages.length !== 0) {
-                lastMessage.textContent = item.messages[item.messages.length - 1].message;
+                lastMessage.textContent = item.messages[item.messages.length - 1];
             } else {
                 lastMessage.textContent = 'Нет сообщений';
             }
@@ -114,15 +123,15 @@ export class ChatUserScreen {
     }
 
     getMatchList(matchedString, list) {
-        return Array.from(list).filter(item =>
-            (this.isMatching(item.fio, matchedString))
-        );
+        debugger;
+        return list.filter(item => this.isMatching(item.fio, matchedString));
     }
 
 
     isMatching(full = '', chunk = '') {
         let lowCaseFull = full.toLowerCase();
         let lowCaseChunk = chunk.toLowerCase();
+        debugger;
 
         return lowCaseFull.includes(lowCaseChunk);
     }
