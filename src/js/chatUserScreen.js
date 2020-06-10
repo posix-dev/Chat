@@ -33,7 +33,6 @@ export class ChatUserScreen {
     initUiListeners() {
         this.searchInput.addEventListener('keyup', e => {
             const filteredList = this.getMatchList(e.target.value, this.userArray);
-            debugger;
             this.renderUsers(filteredList);
         });
         this.uploadAvatarCloseBtn.addEventListener(
@@ -59,7 +58,6 @@ export class ChatUserScreen {
 
             if (target.tagName === 'IMG') {
                 if (target.classList.contains('chat-item__avatar')) {
-                    debugger;
                     this.uploadAvatarBtn.src = e.target.src;
                     const wrapper = e.target.nextElementSibling;
                     const name = wrapper.firstChild;
@@ -93,7 +91,6 @@ export class ChatUserScreen {
             const avatar = li.querySelector('.chat-item__avatar');
             const lastMessage = li.querySelector('.chat-item__last-message');
             name.textContent = item.fio;
-            debugger;
             if (item.messages && item.messages.length !== 0) {
                 lastMessage.textContent = item.messages[item.messages.length - 1];
             } else {
@@ -121,7 +118,6 @@ export class ChatUserScreen {
     }
 
     getMatchList(matchedString, list) {
-        debugger;
         return list.filter(item => this.isMatching(item.fio, matchedString));
     }
 
@@ -129,8 +125,6 @@ export class ChatUserScreen {
     isMatching(full = '', chunk = '') {
         let lowCaseFull = full.toLowerCase();
         let lowCaseChunk = chunk.toLowerCase();
-        debugger;
-
         return lowCaseFull.includes(lowCaseChunk);
     }
 

@@ -54,9 +54,7 @@ export class ChatMessagesScreen {
             this.typingMessage.textContent = '';
         });
 
-        this.clientServer.socket.on('messages', messages => {
-            console.log(`message event ${messages}`);
-        });
+        this.clientServer.socket.on('messages', messages => {});
     }
 
     handleMessage(data) {

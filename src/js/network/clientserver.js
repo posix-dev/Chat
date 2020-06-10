@@ -1,9 +1,9 @@
 import io from 'socket.io-client'
+import {CLIENT_SERVER_PORT} from "../utils/constants";
 
 export class ClientServer {
     constructor() {
-        const PORT = 3016;
-        this.clientServer = `http://localhost:${PORT}`;
+        this.clientServer = `http://localhost:${CLIENT_SERVER_PORT}`;
         this.socket = io(this.clientServer);
     }
 }

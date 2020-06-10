@@ -1,6 +1,7 @@
 class Server {
+
     constructor() {
-        this.PORT = 3016;
+        this.PORT = 3017;
         const express = require('express');
         const app = express();
         let server = require('http').createServer(app);
@@ -21,12 +22,9 @@ class Server {
                 socket.broadcast.emit('userList', clients);
             });
 
-            socket.on('auth', () => {
-                io.sockets.sockets[socket.id].emit('auth', socket.id);
-            });
+            socket.on('auth', () => io.sockets.sockets[socket.id].emit('auth', socket.id));
 
             socket.on('message', messageData => {
-                console.dir(`just message`);
                 const objIndex = clients.findIndex((user => user.id === socket.id));
                 clients[objIndex].messages.push(messageData.message);
                 io.sockets.emit('message', {...messageData, fio: socket.username, avatar: clients[objIndex].avatar, user: clients[objIndex]});
@@ -35,19 +33,16 @@ class Server {
             socket.on('sendImg', async img => {
                 const objIndex = clients.findIndex((user => user.id === socket.id));
                 clients[objIndex].avatar = img;
-                clients.forEach(item => {
-                    console.log(`${item.avatar} ${item.id} ${item.fio}`)
-                })
                 io.sockets.emit('sendImg', clients[objIndex]);
             });
 
             socket.on('addUser', user => {
-                if (user['fio']) {
-                    socket.username = user['fio'];
+                if (user.fio) {
+                    socket.username = user.fio;
                 }
                 const userData = {
                     ...user,
-                    fio: user['fio'] ? user['fio'] : socket.username,
+                    fio: user.fio ? user.fio : socket.username,
                     id: socket.id,
                     avatar: '',
                     messages: []
@@ -56,17 +51,9 @@ class Server {
                 io.sockets.emit('addUser', userData);
             })
 
-            socket.on('userList', data => {
-                io.sockets.emit('userList', clients);
-            });
-
-            socket.on('typing', () => {
-                socket.broadcast.emit('typing', {username: socket.username});
-            });
-
-            socket.on('untyping', () => {
-                socket.broadcast.emit('untyping');
-            });
+            socket.on('userList', data => io.sockets.emit('userList', clients));
+            socket.on('typing', () => socket.broadcast.emit('typing', {username: socket.username}));
+            socket.on('untyping', () => socket.broadcast.emit('untyping'));
         })
 
 
@@ -78,6 +65,7 @@ class Server {
             console.log('server started');
         });
     }
+
 }
 
 const server = new Server();

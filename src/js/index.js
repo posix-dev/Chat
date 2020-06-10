@@ -13,13 +13,6 @@ function init() {
     const auth = new AuthScreen(router, clientServer, authIdHandler);
     const chat = new ChatScreen(router, clientServer, authIdHandler);
 
-    clientServer.socket.on('connect', function (m) {
-        console.log(`connect ${m}`);
-    });
-    clientServer.socket.on('disconnect', function () {
-        console.log('disconnect');
-    });
-
     window.addEventListener('popstate', e => {
         if (e.state && e.state.page) {
             router.navigateTo(e.state.page);
