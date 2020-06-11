@@ -45,10 +45,10 @@
   color: $auth-dialog-text-input-color
   border: 0
   outline: 0
-  border-bottom: 2px solid #465362
+  border-bottom: rem(2px) solid $auth-dialog-form-border-color
   width: rem(330px)
   &:focus
-    border-bottom: 2px solid #5288c1
+    border-bottom: rem(2px) solid $auth-dialog-submit-btn-color
 
 .auth-dialog__form-input_submit
   display: block
@@ -59,7 +59,7 @@
   text-transform: uppercase
   font-weight: bold
   font-family: "Ubuntu Medium", sans-serif
-  background-color: #5288c1
+  background-color: $auth-dialog-submit-btn-color
   color: $auth-dialog-text-input-color
   cursor: pointer
 
@@ -73,7 +73,7 @@
     content: ''
     height: rem(20px)
     width: rem(2px)
-    background-color: #ffffff
+    background-color: $mainFontColor
   &:before
     transform: rotate(45deg)
   &:after

@@ -4,7 +4,7 @@
 .chat-wrapper
   width: rem(810px)
   height: rem(452px)
-  background-color: #0e1621
+  background-color: $chat-wrapper-color
 
 .chat-options
   background-color: $auth-dialog-img-wrapper-background-color
@@ -30,14 +30,14 @@
   margin-top: rem(6px)
   height: rem(3px)
   cursor: pointer
-  border-bottom: rem(2px) solid #52616d
+  border-bottom: rem(2px) solid $chat-collapse-color
 
 .fullscreen
   cursor: pointer
   width: rem(10px)
   height: rem(10px)
   color: transparent
-  border: rem(2px) solid #52616d
+  border: rem(2px) solid $chat-collapse-color
 
 .close
   width: rem(11px)
@@ -99,7 +99,7 @@
   cursor: pointer
 
 .chat-item__profile-name
-  color: #ffffff
+  color: $mainFontColor
   font-family: "Ubuntu Light", sans-serif
   font-size: 14px
   font-weight: 300
@@ -142,7 +142,6 @@
 
 .chat-writing-wrapper
   width: rem(551px)
-  //display: flex
   position: fixed
   float: right
   bottom: rem(-20px)
@@ -168,49 +167,14 @@
 
 .chat-detail-messages__message
   padding: rem(9px) rem(10px) rem(2px) rem(12px)
-  background-color: #182533
-  //background-color: #00aabb
+  background-color: $chat-message-color
   border-radius: rem(6px)
-
-//left
-//.chat-detail-messages__item
-//  &:first-child
-//    &:before
-//      content: ''
-//      position: absolute
-//      left: 0
-//      top: 50%
-//      width: 0
-//      height: 0
-//      border: rem(11px) solid transparent
-//      border-right-color: #182533
-//      border-left: 0
-//      border-bottom: 0
-//      margin-top: 0
-//      margin-left: 0
-
-//right
-//.chat-detail-messages__item
-//  &:first-child
-//    &:after
-//      content: ''
-//      position: absolute
-//      right: 26%
-//      top: 51%
-//      width: 0
-//      height: 0
-//      border: rem(11px) solid transparent
-//      border-left-color: #00aabb
-//      border-right: 0
-//      border-bottom: 0
-//      margin-top: -16.5px
-//      margin-right: -33px
 
 .chat-detail-messages__username
   font-size: 12px
   max-width: rem(30px)
   position: absolute
-  color: #d45d75
+  color: $chat-username-color
   top: 0
   left: rem(15px)
 
@@ -232,7 +196,7 @@
   position: relative
   top: rem(5px)
   margin-left: rem(12px)
-  color: #7a8c9e
+  color: $chat-message_time-color
   font-family: "Ubuntu Light", sans-serif
   font-size: 14px
   font-weight: 300
@@ -250,9 +214,9 @@
   padding: rem(6px) rem(10px)
   border-radius: rem(5px)
   margin-right: rem(10px)
-  right: 5px
+  right: rem(5px)
   cursor: pointer
-  background: #5288c1
+  background: $chat-sent_message-color
   color: white
   font-size: 14px
 
@@ -263,7 +227,7 @@
 .chat-messages__typing
   position: fixed
   font-size: 12px
-  color: #7a8c9e
+  color: $chat-message_time-color
   bottom: 0
   right: 0
   margin-right: rem(16px)

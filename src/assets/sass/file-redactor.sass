@@ -5,15 +5,12 @@
   width: rem(364px)
   height: rem(452px)
   background-color: $auth-dialog-background-color
-  box-shadow: 0 0 0 3px #202d3d
+  box-shadow: 0 0 0 rem(3px) $file-redactor-wrapper-color
 
 .file-redactor-dialog__img
   width: rem(284px)
   height: rem(308px)
   src: url("../../assets/img/default_photo.png")
-  //background-image: url("../../assets/img/default_photo.png")
-  //background-repeat: no-repeat
-  //background-position: center
   margin: rem(32px) auto 0
 
 .file-redactor-dialog__photo-region
@@ -25,10 +22,10 @@
   font-size: 14px
   font-weight: 300
   margin: rem(20px) auto 0
-  color: #7f91a4
+  color: $file-redactor-dialog-region-color
 
 .file-redactor-dialog__button
-  color: #4f83b1
+  color: $file-redactor-btns-color
   background-color: transparent
   font-family: "Ubuntu Light", sans-serif
   text-transform: uppercase
@@ -37,7 +34,7 @@
   padding: rem(10px) rem(10px)
   cursor: pointer
   &:hover
-    background-color: #1d2a39
+    background-color: $file-redactor-dialog-btn-back-color
     border-radius: rem(6px)
 
 .file-redactor-dialog__btn-wrapper

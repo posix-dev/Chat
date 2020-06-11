@@ -5,8 +5,8 @@
 .upload-avatar-dialog
   height: rem(210px)
   width: rem(350px)
-  border-radius: 4px
-  box-shadow: 0 0 0 3px #202d3d
+  border-radius: rem(4px)
+  box-shadow: 0 0 0 rem(3px) $upload-avatar-shadow-color
   background-color: $auth-dialog-background-color
 
 .upload-avatar-dialog__close-btn
@@ -19,7 +19,7 @@
     content: ''
     height: rem(20px)
     width: rem(2px)
-    background-color: #737e87
+    background-color: $upload-avatar-close-color
   &:before
     transform: rotate(45deg)
   &:after
@@ -42,9 +42,6 @@
   height: rem(87px)
   background-color: $auth-dialog-img-wrapper-background-color
   border-radius: 50%
-  //background-image: url("../../assets/img/camera.png")
-  //background-repeat: no-repeat
-  //background-position: center
   cursor: pointer
 
 .upload-avatar-dialog__profile-info
